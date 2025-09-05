@@ -19,24 +19,24 @@ return {
     end,
   },
 
-  {
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      require('onedark').setup {
-        style = 'deep', -- Options: dark, darker, cool, deep, warm, warmer, light
-        transparent = false,
-        code_style = {
-          comments = 'none',
-          keywords = 'bold',
-          functions = 'italic',
-          strings = 'none',
-          variables = 'none',
-        },
-      }
-      require('onedark').load()
-    end,
-  },
+  -- {
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('onedark').setup {
+  --       style = 'deep', -- Options: dark, darker, cool, deep, warm, warmer, light
+  --       transparent = false,
+  --       code_style = {
+  --         comments = 'none',
+  --         keywords = 'bold',
+  --         functions = 'italic',
+  --         strings = 'none',
+  --         variables = 'none',
+  --       },
+  --     }
+  --     require('onedark').load()
+  --   end,
+  -- },
 
   {
     'rose-pine/neovim',
