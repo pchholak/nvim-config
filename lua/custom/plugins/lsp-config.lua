@@ -177,12 +177,20 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      local hostname = vim.loop.os_gethostname() -- get hostname
+      if hostname == 'NIAAA-10CHHOLMM' then
+        pythonPath = '/Users/chholakp2/anaconda3/bin/python'
+      elseif hostname == 'mastertape-3.local' then
+        pythonPath = '/opt/anaconda3/bin/python'
+      end
+
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         pyright = {
           settings = {
             python = {
-              pythonPath = '/opt/anaconda3/bin/python',
+              pythonPath = pythonPath,
               analysis = {
                 autoSearchPaths = true,
                 extraPaths = { '.' },
