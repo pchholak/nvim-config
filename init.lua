@@ -88,6 +88,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Set quickfix keyboard shortcuts
+vim.keymap.set('n', '∆', '<cmd>cnext<CR>')
+vim.keymap.set('n', '˚', '<cmd>cprev<CR>')
+
 -- Exit terminal mode in the builtin terminal. This won't work in all terminal
 -- emulators/tmux/etc (so just use <C-\><C-n>).
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -124,6 +128,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- Open custom terminal buffer
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = true
+    vim.opt.relativenumber = true
+  end,
+})
+
+-- Open small terminal
+local job_id = 0
+vim.keymap.set('n', '<space>st', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 15)
+
+  job_id = vim.bo.channel
+end)
+
+-- Set keymap for sending custom commands directly to the opened small terminal
+vim.keymap.set('n', '<space>hello', function()
+  -- make
+  -- go build, go test .asdfasdf
+  vim.fn.chansend(job_id, { "echo 'hello'\r\n" })
+end)
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
