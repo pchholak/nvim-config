@@ -184,7 +184,8 @@ return {
       elseif hostname == 'mastertape-3.local' then
         pythonPath = '/opt/anaconda3/bin/python'
       elseif hostname == 'darkmatter' then
-        pythonPath = '~/anaconda3/bin/python'
+        -- pythonPath = '~/anaconda3/bin/python'
+        pythonPath = vim.fn.expand '~/anaconda3/bin/python'
       end
 
       local servers = {
