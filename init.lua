@@ -138,9 +138,11 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- Open small terminal
+-- Custom nvim terminal commands
 local job_id = 0
-vim.keymap.set('n', '<space>st', function()
+
+--    Open small terminal
+vim.keymap.set('n', '<space>hst', function()
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd 'J'
@@ -149,7 +151,15 @@ vim.keymap.set('n', '<space>st', function()
   job_id = vim.bo.channel
 end)
 
--- Set keymap for sending custom commands directly to the opened small terminal
+--    Open terminal in vertical split
+vim.keymap.set('n', '<space>vst', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+
+  job_id = vim.bo.channel
+end)
+
+--    Set keymap for sending custom commands directly to the opened small terminal
 vim.keymap.set('n', '<space>hello', function()
   -- make
   -- go build, go test .asdfasdf
