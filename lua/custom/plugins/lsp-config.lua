@@ -178,15 +178,34 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-      local hostname = vim.loop.os_gethostname() -- get hostname
-      if hostname == 'NIAAA-10CHHOLMM' then
-        pythonPath = '/Users/chholakp2/anaconda3/bin/python'
-      elseif hostname == 'mastertape-3.local' then
-        pythonPath = '/opt/anaconda3/bin/python'
-      elseif hostname == 'darkmatter' then
-        -- pythonPath = '~/anaconda3/bin/python'
-        pythonPath = vim.fn.expand '~/anaconda3/bin/python'
+      -- local hostname = vim.loop.os_gethostname() -- get hostname
+      -- if hostname == 'NIAAA-10CHHOLMM' then
+      --   pythonPath = '/Users/chholakp2/anaconda3/bin/python'
+      -- elseif hostname == 'mastertape-3.local' then
+      --   pythonPath = '/opt/anaconda3/bin/python'
+      -- elseif hostname == 'darkmatter' then
+      --   -- pythonPath = '~/anaconda3/bin/python'
+      --   pythonPath = vim.fn.expand '~/anaconda3/bin/python'
+      -- end
+
+      local conda_exe = vim.env.CONDA_EXE ~= '' and vim.env.CONDA_EXE or vim.fn.exepath 'conda'
+      local function conda_base_python()
+        if conda_exe == '' then
+          return nil, nil
+        end
+        local conda_base = vim.fn.trim(vim.fn.system(conda_exe .. ' info --base'))
+        if conda_base == '' then
+          return nil, nil
+        end
+        -- call python via 'conda run' using the real conda executable
+        local cmd = conda_exe .. ' run -n base python -c "import sys,os;print(os.path.realpath(sys.executable))"'
+        local py = vim.fn.trim(vim.fn.system(cmd))
+        if py == '' then
+          py = conda_base .. '/bin/python'
+        end
+        return py, conda_base
       end
+      local pythonPath, conda_base = conda_base_python()
 
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
