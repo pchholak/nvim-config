@@ -178,16 +178,6 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-      -- local hostname = vim.loop.os_gethostname() -- get hostname
-      -- if hostname == 'NIAAA-10CHHOLMM' then
-      --   pythonPath = '/Users/chholakp2/anaconda3/bin/python'
-      -- elseif hostname == 'mastertape-3.local' then
-      --   pythonPath = '/opt/anaconda3/bin/python'
-      -- elseif hostname == 'darkmatter' then
-      --   -- pythonPath = '~/anaconda3/bin/python'
-      --   pythonPath = vim.fn.expand '~/anaconda3/bin/python'
-      -- end
-
       local conda_exe = vim.env.CONDA_EXE ~= '' and vim.env.CONDA_EXE or vim.fn.exepath 'conda'
       local function conda_base_python()
         if conda_exe == '' then
@@ -237,6 +227,8 @@ return {
         bashls = {},
         jsonls = {},
         texlab = {},
+        -- tsserver = {},
+        ts_ls = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
