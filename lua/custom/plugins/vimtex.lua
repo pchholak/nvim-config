@@ -4,5 +4,6 @@ return {
   init = function()
     -- vim.g.maplocalleader = ','
     vim.g.vimtex_view_method = 'skim'
+    vim.g.vimtex_compiler_latexmk = { out_dir = 'build' }
   end,
 }
