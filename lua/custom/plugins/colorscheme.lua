@@ -15,29 +15,27 @@ return {
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-storm'
+      -- vim.cmd.colorscheme 'tokyonight-storm'
     end,
   },
-
-  -- {
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     require('onedark').setup {
-  --       style = 'deep', -- Options: dark, darker, cool, deep, warm, warmer, light
-  --       transparent = false,
-  --       code_style = {
-  --         comments = 'none',
-  --         keywords = 'bold',
-  --         functions = 'italic',
-  --         strings = 'none',
-  --         variables = 'none',
-  --       },
-  --     }
-  --     require('onedark').load()
-  --   end,
-  -- },
-
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      require('onedark').setup {
+        style = 'deep', -- Options: dark, darker, cool, deep, warm, warmer, light
+        transparent = false,
+        code_style = {
+          comments = 'none',
+          keywords = 'bold',
+          functions = 'italic',
+          strings = 'none',
+          variables = 'none',
+        },
+      }
+      -- require('onedark').load()
+    end,
+  },
   {
     'rose-pine/neovim',
     name = 'rose-pine',
@@ -56,7 +54,6 @@ return {
       -- vim.cmd.colorscheme 'rose-pine'
     end,
   },
-
   {
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -66,6 +63,22 @@ return {
         flavour = 'latte', -- "latte", "frappe", "macchiato", "mocha"
       }
       -- vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+  {
+    'tiagovla/tokyodark.nvim',
+    name = 'tokyodark',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'tokyodark'
+    end,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'kanagawa'
     end,
   },
 }
