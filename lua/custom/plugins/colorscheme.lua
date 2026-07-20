@@ -23,7 +23,7 @@ return {
     priority = 1000,
     config = function()
       require('onedark').setup {
-        style = 'dark', -- Options: dark, darker, cool, deep, warm, warmer, light
+        style = 'deep', -- Options: dark, darker, cool, deep, warm, warmer, light
         transparent = false,
         code_style = {
           comments = 'none',
@@ -33,7 +33,7 @@ return {
           variables = 'none',
         },
       }
-      -- vim.cmd.colorscheme 'onedark'
+      -- require('onedark').load()
     end,
   },
 
@@ -65,6 +65,24 @@ return {
         flavour = 'macchiato', -- "latte", "frappe", "macchiato", "mocha"
       }
       -- vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+
+  {
+    'tiagovla/tokyodark.nvim',
+    name = 'tokyodark',
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'tokyodark'
+    end,
+  },
+
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'kanagawa'
     end,
   },
 }
