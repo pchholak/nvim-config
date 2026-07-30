@@ -178,24 +178,16 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-      local conda_exe = vim.env.CONDA_EXE ~= '' and vim.env.CONDA_EXE or vim.fn.exepath 'conda'
-      local function conda_base_python()
-        if conda_exe == '' then
-          return nil, nil
+      -- Set pythonPath to either the python path of currently activated conda env or the base env
+      --   Then use this pythonPath as input to pyright setup so it can use the current env's python
+      local conda_prefix = vim.env.CONDA_PREFIX
+      if not conda_prefix or conda_prefix == '' then
+        local conda_exe = vim.fn.exepath 'conda'
+        if conda_exe ~= '' then
+          conda_prefix = vim.fn.trim(vim.fn.system(conda_exe .. ' info --base'))
         end
-        local conda_base = vim.fn.trim(vim.fn.system(conda_exe .. ' info --base'))
-        if conda_base == '' then
-          return nil, nil
-        end
-        -- call python via 'conda run' using the real conda executable
-        local cmd = conda_exe .. ' run -n base python -c "import sys,os;print(os.path.realpath(sys.executable))"'
-        local py = vim.fn.trim(vim.fn.system(cmd))
-        if py == '' then
-          py = conda_base .. '/bin/python'
-        end
-        return py, conda_base
       end
-      local pythonPath, conda_base = conda_base_python()
+      local pythonPath = conda_prefix .. '/bin/python'
 
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
