@@ -179,6 +179,7 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
       -- Set pythonPath to either the python path of currently activated conda env or the base env
+      -- If conda not installed, then falls back to system installation of python3
       --   Then use this pythonPath as input to pyright setup so it can use the current env's python
       local conda_prefix = vim.env.CONDA_PREFIX
       if not conda_prefix or conda_prefix == '' then
@@ -187,7 +188,7 @@ return {
           conda_prefix = vim.fn.trim(vim.fn.system(conda_exe .. ' info --base'))
         end
       end
-      local pythonPath = conda_prefix .. '/bin/python'
+      local pythonPath = conda_prefix and (conda_prefix .. '/bin/python') or vim.fn.exepath 'python3'
 
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
