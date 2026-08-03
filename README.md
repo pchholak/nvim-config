@@ -1,16 +1,22 @@
 # nvim custom config
 
 Install the following dependencies:
-- node
-```
-brew install node
-```
+- node / npm
 - ripgrep
+- tree-sitter / tree-sitter-cli
+
+## macOS
 ```
-brew install ripgrep
+brew install node ripgrep tree-sitter tree-sitter-cli
 ```
-- tree-sitter
+
+## Debian
 ```
-brew install tree-sitter
-brew install tree-sitter-cli
+sudo apt install nodejs npm ripgrep
+cargo install --locked tree-sitter-cli
+```
+
+## Fedora
+```
+sudo dnf install npm
 ```
