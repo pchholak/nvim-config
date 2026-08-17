@@ -26,8 +26,11 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+if vim.env.SSH_TTY then
+  vim.g.clipboard = 'osc52' -- use OSC-52 clipboard (instead of wl-copy, pbcopy, etc.) when connected over SSH
+end
 vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
+  vim.o.clipboard = 'unnamedplus' -- use the system + clipboard for normal yank/delete/paste operations
 end)
 
 -- Enable break indent
@@ -89,8 +92,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Set quickfix keyboard shortcuts
-vim.keymap.set('n', '∆', '<cmd>cnext<CR>')
-vim.keymap.set('n', '˚', '<cmd>cprev<CR>')
+vim.keymap.set('n', '∆', '<cmd>cnext<CR>') -- ∆ -> Alt/Option + J
+vim.keymap.set('n', '˚', '<cmd>cprev<CR>') -- ˚ -> Alt/Option + K
 
 -- Exit terminal mode in the builtin terminal. This won't work in all terminal
 -- emulators/tmux/etc (so just use <C-\><C-n>).
@@ -159,12 +162,12 @@ vim.keymap.set('n', '<space>vst', function()
   job_id = vim.bo.channel
 end)
 
---    Set keymap for sending custom commands directly to the opened small terminal
-vim.keymap.set('n', '<space>hello', function()
-  -- make
-  -- go build, go test .asdfasdf
-  vim.fn.chansend(job_id, { "echo 'hello'\r\n" })
-end)
+-- --    Set keymap for sending custom commands directly to the opened small terminal
+-- vim.keymap.set('n', '<space>hello', function()
+--   -- make
+--   -- go build, go test .asdfasdf
+--   vim.fn.chansend(job_id, { "echo 'hello'\r\n" })
+-- end)
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
