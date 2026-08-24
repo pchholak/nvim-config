@@ -88,16 +88,16 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Exit terminal mode in the builtin terminal. This won't work in all terminal
+-- emulators/tmux/etc (so just use <C-\><C-n>).
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Set quickfix keyboard shortcuts
 vim.keymap.set('n', '∆', '<cmd>cnext<CR>') -- ∆ -> Alt/Option + J
 vim.keymap.set('n', '˚', '<cmd>cprev<CR>') -- ˚ -> Alt/Option + K
-
--- Exit terminal mode in the builtin terminal. This won't work in all terminal
--- emulators/tmux/etc (so just use <C-\><C-n>).
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -162,13 +162,6 @@ vim.keymap.set('n', '<space>vst', function()
   job_id = vim.bo.channel
 end)
 
--- --    Set keymap for sending custom commands directly to the opened small terminal
--- vim.keymap.set('n', '<space>hello', function()
---   -- make
---   -- go build, go test .asdfasdf
---   vim.fn.chansend(job_id, { "echo 'hello'\r\n" })
--- end)
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -188,7 +181,6 @@ rtp:prepend(lazypath)
 -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
 require('lazy').setup(
   {
-
     --  Add your own choice of plugins modularly
     { import = 'custom.plugins' },
   },
