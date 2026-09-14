@@ -96,8 +96,8 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Set quickfix keyboard shortcuts
-vim.keymap.set('n', '∆', '<cmd>cnext<CR>') -- ∆ -> Alt/Option + J
-vim.keymap.set('n', '˚', '<cmd>cprev<CR>') -- ˚ -> Alt/Option + K
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>') -- Alt/Option + J
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>') -- Alt/Option + K
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
